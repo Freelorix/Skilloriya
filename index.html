@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Skilloriya — Video Editor Portfolio</title>
+  <meta name="description" content="Skilloriya — Professional Video Editing & Animation Portfolio" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .reveal { opacity: 0; transform: translateY(18px); transition: all .7s ease; }
+    .reveal.show { opacity: 1; transform: translateY(0); }
+    .btn-glow { box-shadow: 0 0 0 rgba(168,85,247,0.7); animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(168,85,247,0.6); } 70% { box-shadow: 0 0 0 16px rgba(168,85,247,0); } 100% { box-shadow: 0 0 0 0 rgba(168,85,247,0); } }
+    .card:hover { transform: translateY(-6px); }
+    .card { transition: transform .3s ease, box-shadow .3s ease; }
+    .glassy{background:rgba(255,255,255,.06);backdrop-filter: blur(8px);}
+    .play-btn {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.4);
+      cursor: pointer;
+      transition: background .3s ease;
+    }
+    .play-btn:hover { background: rgba(0,0,0,0.6); }
+    .play-btn svg { width: 70px; height: 70px; fill: white; }
+    .reveal { opacity: 0; transform: translateY(18px); transition: all .7s ease; }
+    .reveal.show { opacity: 1; transform: translateY(0); }
+    .btn-glow { box-shadow: 0 0 0 rgba(168,85,247,0.7); animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(168,85,247,0.6); } 70% { box-shadow: 0 0 0 16px rgba(168,85,247,0); } 100% { box-shadow: 0 0 0 0 rgba(168,85,247,0); } }
+    .card:hover { transform: translateY(-6px); }
+    .card { transition: transform .3s ease, box-shadow .3s ease; }
+    .ba-wrap{position:relative;overflow:hidden;border-radius:1rem}
+    .ba-wrap img{display:block;width:100%;height:auto}
+    .ba-top{position:absolute;top:0;left:0;height:100%;width:50%;overflow:hidden;transition:width .2s ease}
+    .ba-handle{position:absolute;top:0;left:calc(50% - 1px);height:100%;width:2px;background:#fff}
+    .glassy{background:rgba(255,255,255,.06);backdrop-filter: blur(8px);}
+  </style>
+</head>
+<body class="bg-black text-white antialiased">
+  <!-- NAV -->
+  <header class="sticky top-0 z-50 bg-black/70 backdrop-blur border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" class="text-fuchsia-400">
+          <path d="M12 3l7 4v10l-7 4-7-4V7l7-4z" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M9 12l6 0M12 9l0 6" stroke="currentColor" stroke-width="1.5" />
+        </svg>
+        <span class="font-extrabold tracking-wide text-lg">Skilloriya</span>
+      </div>
+      <nav class="hidden sm:flex items-center gap-6 text-sm text-zinc-300">
+        <a href="#work" class="hover:text-white">Work</a>
+        <a href="#services" class="hover:text-white">Services</a>
+        <a href="#about" class="hover:text-white">About</a>
+        <a href="#contact" class="hover:text-white">Contact</a>
+      </nav>
+      <a href="#contact" class="px-4 py-2 rounded-xl bg-fuchsia-600 hover:bg-fuchsia-700 text-sm font-semibold">Get a Quote</a>
+    </div>
+  </header>
+<body class="bg-black text-white antialiased">
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-fuchsia-600/10 via-pink-500/10 to-transparent pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-20 md:py-28 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
+          Video Editing that <span class="bg-gradient-to-r from-fuchsia-400 to-pink-400 bg-clip-text text-transparent">Hooks, Feels & Converts</span>
+        </h1>
+        <p class="mt-4 text-zinc-300 text-lg md:max-w-xl">
+          Professional edits, motion graphics, and sound design — optimized for YouTube, Instagram Reels, ads, and brand films.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <button id="playShowreel" class="btn-glow px-5 py-3 rounded-2xl bg-fuchsia-600 hover:bg-fuchsia-700 font-semibold inline-flex items-center gap-2">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M8 5v14l11-7L8 5z" fill="currentColor"/></svg>
+            Watch Showreel
+          </button>
+          <a href="#contact" class="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 font-semibold">Hire Us</a>
+        </div>
+      </div>
+
+      <!-- Hero Video with Thumbnail -->
+      <div class="relative rounded-3xl border border-white/10 overflow-hidden card aspect-video" id="heroWrapper">
+        <!-- Thumbnail Image -->
+        <img id="heroThumbnail" src="https://img.youtube.com/vi/beifTlYQZQs/maxresdefault.jpg" alt="Showreel Thumbnail" class="w-full h-full object-cover">
+        <!-- Play Button -->
+        <div id="heroPlayBtn" class="play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rest of your sections remain unchanged ... -->
+</body>
+</html>
+
+<!-- WORK -->
+<section id="work" class="max-w-7xl mx-auto px-4 sm:px-6 py-20">
+  <h2 class="text-3xl md:text-4xl font-bold mb-8 reveal">Featured Projects</h2>
+  <div class="grid md:grid-cols-3 gap-7">
+    
+    <!-- Card 1 -->
+    <article class="reveal card relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 aspect-video" id="workCard1">
+      <!-- Thumbnail -->
+      <img id="workThumbnail1" src="https://img.youtube.com/vi/1vVZldtndTU/maxresdefault.jpg" 
+           alt="Music Video Edit Thumbnail" 
+           class="w-full h-full object-cover">
+      <!-- Play Button -->
+      <div id="workPlayBtn1" class="play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+    </article>
+
+    <!-- Card 2 -->
+    <article class="reveal card relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 aspect-video" id="workCard2">
+      <!-- Thumbnail -->
+      <img id="workThumbnail2" src="https://img.youtube.com/vi/5vS_WklPPAQ/maxresdefault.jpg" 
+           alt="Reel Ad Thumbnail" 
+           class="w-full h-full object-cover">
+      <!-- Play Button -->
+      <div id="workPlayBtn2" class="play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+    </article>
+
+    <!-- Card 3 -->
+    <article class="reveal card relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 aspect-video" id="workCard3">
+      <!-- Thumbnail -->
+      <img id="workThumbnail3" src="https://img.youtube.com/vi/4Vw5gRPQezk/maxresdefault.jpg" 
+           alt="Corporate Promo Thumbnail" 
+           class="w-full h-full object-cover">
+      <!-- Play Button -->
+      <div id="workPlayBtn3" class="play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+  <!-- BEFORE / AFTER -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+  <h3 class="text-2xl font-bold mb-4 reveal">Before / After Edit</h3>
+  <div class="ba-wrap border border-white/10 reveal">
+    <!-- LinkedIn Embedded Video -->
+    <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7368626820474114048?compact=1" 
+            height="399" width="100%" 
+            frameborder="0" allowfullscreen="" 
+            title="Embedded LinkedIn Post"></iframe>
+  </div>
+</section>
+
+
+  <!-- CONTACT -->
+  <section id="contact" class="relative">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-fuchsia-600/5 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-20 md:py-24 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold reveal">Let’s Work Together</h2>
+      <p class="text-zinc-300 mt-3 max-w-2xl mx-auto reveal">Email us your brief, links, and footage reference. We’ll reply with a free short plan + quote.</p>
+      <div class="mt-8 flex justify-center gap-4 reveal">
+        <a href="mailto:skilloriya.edit@gmail.com" class="px-6 py-3 rounded-2xl bg-fuchsia-600 hover:bg-fuchsia-700 font-semibold inline-flex items-center gap-2">Email: skilloriya.edit@gmail.com</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL for Showreel -->
+  <div id="videoModal" class="fixed inset-0 bg-black/90 flex items-center justify-center hidden z-50">
+    <div class="relative w-11/12 md:w-3/4 lg:w-1/2 aspect-video">
+      <iframe id="modalVideo" class="w-full h-full rounded-xl" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <button id="closeModal" class="absolute -top-10 right-0 text-white text-2xl">✕</button>
+    </div>
+  </div>
+<!-- SERVICES SECTION -->
+<section id="services" class="max-w-7xl mx-auto px-4 sm:px-6 py-20">
+  <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 reveal">
+    Our Services
+  </h2>
+  <p class="text-zinc-400 text-center max-w-2xl mx-auto mb-12 reveal">
+    At <span class="text-fuchsia-400 font-semibold">Skilloriya</span>, we provide high-quality editing solutions 
+    designed to make your content shine across all platforms.
+  </p>
+
+  <div class="grid md:grid-cols-3 gap-8">
+    <!-- Service 1 -->
+    <div class="card bg-white/5 border border-white/10 rounded-2xl p-8 text-center hover:shadow-xl hover:shadow-fuchsia-500/20 transition transform hover:-translate-y-2 reveal">
+      <div class="flex justify-center mb-5">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-fuchsia-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5L19.5 7.5M19.5 7.5l-3.75-3M19.5 7.5L15.75 12M4.5 19.5l3.75-3M8.25 16.5L4.5 13.5M8.25 16.5L12 13.5M8.25 16.5l3.75 3" />
+        </svg>
+      </div>
+      <h3 class="text-xl font-semibold mb-3">Video Editing</h3>
+      <p class="text-zinc-400 text-sm">
+        Seamless cuts, storytelling flow, transitions, and pacing designed 
+        to keep your audience hooked till the last second.
+      </p>
+    </div>
+
+    <!-- Service 2 -->
+    <div class="card bg-white/5 border border-white/10 rounded-2xl p-8 text-center hover:shadow-xl hover:shadow-fuchsia-500/20 transition transform hover:-translate-y-2 reveal">
+      <div class="flex justify-center mb-5">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-fuchsia-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L15 12 9.75 7v10.5z" />
+        </svg>
+      </div>
+      <h3 class="text-xl font-semibold mb-3">Motion Graphics</h3>
+      <p class="text-zinc-400 text-sm">
+        Engaging animations, kinetic text, and logo reveals that boost 
+        the professionalism of your content.
+      </p>
+    </div>
+
+    <!-- Service 3 -->
+    <div class="card bg-white/5 border border-white/10 rounded-2xl p-8 text-center hover:shadow-xl hover:shadow-fuchsia-500/20 transition transform hover:-translate-y-2 reveal">
+      <div class="flex justify-center mb-5">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-fuchsia-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+        </svg>
+      </div>
+      <h3 class="text-xl font-semibold mb-3">Social Media Packages</h3>
+      <p class="text-zinc-400 text-sm">
+        Shorts, Reels, Ads, and TikTok edits optimized for engagement, 
+        algorithms, and conversions.
+      </p>
+    </div>
+  </div>
+</section>
+<!-- ABOUT SECTION -->
+<section id="about" class="max-w-7xl mx-auto px-4 sm:px-6 py-20">
+  <div class="grid md:grid-cols-2 gap-10 items-center">
+    
+    <!-- Left: Image / Thumbnail -->
+    <div class="relative rounded-2xl overflow-hidden border border-white/10 card reveal">
+      <!-- Yaha apni image/logo lagana hai -->
+      <img src="https://plus.unsplash.com/premium_photo-1664475041816-1efbb77b12ec?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGhvdG8lMjBzdHVkaW98ZW58MHx8MHx8fDA%3D" 
+           alt="Skilloriya Studio" 
+           class="w-full h-full object-cover">
+    </div>
+    
+    <!-- Right: Text Content -->
+    <div class="reveal">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">About <span class="text-fuchsia-400">Skilloriya</span></h2>
+      <p class="text-zinc-300 mb-6">
+        We are a creative video editing & motion design studio passionate about 
+        transforming raw footage into cinematic stories. At <span class="font-semibold">Skilloriya</span>, 
+        our mission is to craft videos that not only look stunning but also deliver 
+        powerful impact for brands and creators.
+      </p>
+      
+      <!-- Skills / Highlights -->
+      <ul class="space-y-3 text-zinc-400">
+        <li class="flex items-center gap-2">
+          ✅ Professional editing for YouTube, Ads, and Films
+        </li>
+        <li class="flex items-center gap-2">
+          ✅ Motion graphics & advanced visual effects
+        </li>
+        <li class="flex items-center gap-2">
+          ✅ Social media optimized short-form edits
+        </li>
+        <li class="flex items-center gap-2">
+          ✅ Creative storytelling & sound design
+        </li>
+      </ul>
+      
+      <div class="mt-8">
+        <a href="#contact" class="px-6 py-3 rounded-2xl bg-fuchsia-600 hover:bg-fuchsia-700 font-semibold">
+          Let’s Collaborate
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <footer class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 text-sm text-zinc-400 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+      <span>© <span id="yr"></span> Skilloriya. All rights reserved.</span>
+      <span>Built with ❤️ by Skilloriya Studio</span>
+    </div>
+  </footer>
+
+  <script>
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); } });
+    },{threshold: .12});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+    // Showreel Modal
+    const playBtn = document.getElementById("playShowreel");
+    const modal = document.getElementById("videoModal");
+    const modalVideo = document.getElementById("modalVideo");
+    const closeBtn = document.getElementById("closeModal");
+
+    playBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+      modalVideo.src = "sequence 01.mp4?autoplay=1";
+    });
+
+    closeBtn.addEventListener("click", () => {
+      modal.classList.add("hidden");
+      modalVideo.src = "";
+    });
+
+    // year
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    const heroWrapper = document.getElementById("heroWrapper");
+    const heroPlayBtn = document.getElementById("heroPlayBtn");
+    const heroThumbnail = document.getElementById("heroThumbnail");
+    const playShowreel = document.getElementById("playShowreel");
+
+    function playHeroVideo(){
+      heroWrapper.innerHTML = `
+        <iframe width="100%" height="100%" 
+          src="https://www.youtube.com/embed/beifTlYQZQs?autoplay=1" 
+          title="Showreel" frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" 
+          allowfullscreen></iframe>
+      `;
+    }
+
+    heroPlayBtn.addEventListener("click", playHeroVideo);
+    playShowreel.addEventListener("click", playHeroVideo);
+
+    // year
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    // Work Section Video (Card 1)
+const workCard1 = document.getElementById("workCard1");
+const workPlayBtn1 = document.getElementById("workPlayBtn1");
+const workThumbnail1 = document.getElementById("workThumbnail1");
+
+function playWorkVideo1(){
+  workCard1.innerHTML = `
+    <iframe width="100%" height="100%" 
+      src="https://www.youtube.com/embed/1vVZldtndTU?autoplay=1" 
+      title="Music Video Edit" frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" 
+      allowfullscreen></iframe>
+  `;
+}
+workPlayBtn1.addEventListener("click", playWorkVideo1);
+workThumbnail1.addEventListener("click", playWorkVideo1);
+
+// Work Section Video (Card 2)
+const workCard2 = document.getElementById("workCard2");
+const workPlayBtn2 = document.getElementById("workPlayBtn2");
+const workThumbnail2 = document.getElementById("workThumbnail2");
+
+function playWorkVideo2(){
+  workCard2.innerHTML = `
+    <iframe width="100%" height="100%" 
+      src="https://www.youtube.com/embed/5vS_WklPPAQ?autoplay=1" 
+      title="Reel Ad" frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" 
+      allowfullscreen></iframe>
+  `;
+}
+workPlayBtn2.addEventListener("click", playWorkVideo2);
+workThumbnail2.addEventListener("click", playWorkVideo2);
+
+// Work Section Video (Card 3)
+const workCard3 = document.getElementById("workCard3");
+const workPlayBtn3 = document.getElementById("workPlayBtn3");
+const workThumbnail3 = document.getElementById("workThumbnail3");
+
+function playWorkVideo3(){
+  workCard3.innerHTML = `
+    <iframe width="100%" height="100%" 
+      src="https://www.youtube.com/embed/4Vw5gRPQezk?autoplay=1" 
+      title="Corporate Promo" frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" 
+      allowfullscreen></iframe>
+  `;
+}
+workPlayBtn3.addEventListener("click", playWorkVideo3);
+workThumbnail3.addEventListener("click", playWorkVideo3);
+
+  </script>
+</body>
+</html>
